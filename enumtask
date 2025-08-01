@@ -1,0 +1,140 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Win32;
+
+namespace enum_task
+{
+    internal class Program
+    {
+        [Flags]
+        enum epermissions : short 
+        { 
+        
+           insert =1,
+         read,
+         update,
+         delete ,
+                
+
+        }
+        enum eroles : short
+        {
+            manager,
+            admin,
+            supervisor,
+            normaluser
+        }
+        static eroles getrole (string user,string password)
+            {
+            if (user == "manager" && password == "manager1")
+                return eroles.manager;
+            else if (user == "admin" && password == "admin2")
+                return eroles.admin;
+            else if (user == "supervisor" && password == "supervisor3")
+                return eroles.supervisor;
+            else
+                return eroles.normaluser;
+            }
+        static epermissions getuser_permissions (eroles userrole)
+        {
+            switch (userrole)
+            {
+                case eroles.manager:
+                    return epermissions.insert|epermissions.read|epermissions.update|epermissions.delete;
+                case eroles.admin:
+                    return epermissions.insert | epermissions.read | epermissions.update;
+                case eroles.supervisor:
+                    return epermissions.insert | epermissions.read;
+                case eroles.normaluser:
+                    return epermissions.read;
+                default:
+                    return epermissions.read;
+            }
+        }
+        static void Main(string[] args)
+        {
+            char choice;
+
+                string user, password;
+
+                Console.Write("user:");
+                user = Console.ReadLine();
+
+                Console.Write("password:");
+                password = Console.ReadLine();
+
+                eroles user_role = getrole(user, password);
+                epermissions user_permissions = getuser_permissions(user_role);
+
+                Console.Clear();
+            do
+            {
+                Console.WriteLine("1-insert");
+                Console.WriteLine("2-read");
+                Console.WriteLine("3-update");
+                Console.WriteLine("4-delete");
+                Console.WriteLine("press e for exit");
+
+                choice = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+                Console.Clear() ; 
+                switch (choice)
+                {
+                    case '1':
+                        if ((user_permissions & epermissions.insert) != 0)
+                        {
+                            Console.WriteLine("insert operation");
+                            Console.WriteLine("------------------------");
+                        }
+                        else { 
+                        Console.WriteLine("need insert permission");
+                        Console.WriteLine("------------------------");
+                } break;
+                    case '2':
+                        if ((user_permissions & epermissions.read) != 0)
+                        {
+                            Console.WriteLine("read operation");
+                            Console.WriteLine("------------------------");
+                
+                        }
+                        else
+                        {
+                            Console.WriteLine("need read permission");
+                            Console.WriteLine("------------------------");
+                        }
+                        break;
+                    case '3':
+                        if ((user_permissions & epermissions.update) != 0)
+                        {
+                            Console.WriteLine("update operation");
+                            Console.WriteLine("------------------------");
+                        }
+                        else
+                        {
+                            Console.WriteLine("need update permission");
+                            Console.WriteLine("------------------------");
+                        }
+                            break;
+                    case '4':
+                        if ((user_permissions & epermissions.delete) != 0)
+                        {
+                            Console.WriteLine("delete operation");
+                            Console.WriteLine("------------------------");
+                        }
+                        else
+                        {
+                            Console.WriteLine("need delete permission");
+                            Console.WriteLine("------------------------");
+                        }
+                            break;
+
+                }
+                }
+                while (choice != 'e') ;
+            Console.WriteLine("bye bye");
+        }
+    }
+}
