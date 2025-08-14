@@ -1,0 +1,62 @@
+using System;
+
+namespace rectangle_task_2
+{
+    internal class Program
+    {
+        public class rectangle
+        {
+         
+            public int x1 { get; set; }
+            public int x2 { get; set; }
+            public int y1 { get; set; }
+            public int y2 { get; set; }
+
+            public void print_length()
+            {
+                Console.WriteLine($"The length is: {Math.Abs(x2 - x1)}");
+            }
+
+            public void print_width()
+            {
+                Console.WriteLine($"The width is: {Math.Abs(y2 - y1)}");
+            }
+
+            public void print_area()
+            {
+                Console.WriteLine($"The area is: {Math.Abs(x2 - x1) * Math.Abs(y2 - y1)}");
+            }
+
+            public void print_all_data()
+            {
+                print_length();
+                print_width();
+                print_area();
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            rectangle rec1 = new rectangle();
+
+            Console.Write("Enter x1: ");
+            rec1.x1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter y1: ");
+            rec1.y1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter x2: ");
+            rec1.x2 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter y2: ");
+            rec1.y2 = Convert.ToInt32(Console.ReadLine());
+
+            rec1.print_length();
+            rec1.print_width();
+            rec1.print_area();
+            rec1.print_all_data();
+
+         
+        }
+    }
+}
