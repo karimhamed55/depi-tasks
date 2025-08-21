@@ -12,7 +12,7 @@ namespace _3rdOOPtasks
     {
         static void Main(string[] args)
         {
-            /* point3d point1 = new point3d(5, 3, 6);
+             point3d point1 = new point3d(5, 3, 6);
              point3d point2 = new point3d();
              point2.x = Convert.ToInt32(Console.ReadLine());
              point2.y = Convert.ToInt32(Console.ReadLine());
@@ -32,7 +32,7 @@ namespace _3rdOOPtasks
              Array.Sort(point3d.arr);
              for(int i =0;i<2;i++)
              Console.WriteLine(point3d.arr[i].ToString());
-               */
+               
 
             Duration D1 = new Duration(1, 45, 3);
             Console.WriteLine(D1.ToString());
